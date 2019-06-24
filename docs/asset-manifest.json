@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/eldmeme/static/js/main.fff6b0a1.chunk.js",
+    "main.js.map": "/eldmeme/static/js/main.fff6b0a1.chunk.js.map",
+    "runtime~main.js": "/eldmeme/static/js/runtime~main.519396d7.js",
+    "runtime~main.js.map": "/eldmeme/static/js/runtime~main.519396d7.js.map",
+    "static/css/2.e648e96d.chunk.css": "/eldmeme/static/css/2.e648e96d.chunk.css",
+    "static/js/2.c4cd751c.chunk.js": "/eldmeme/static/js/2.c4cd751c.chunk.js",
+    "static/js/2.c4cd751c.chunk.js.map": "/eldmeme/static/js/2.c4cd751c.chunk.js.map",
+    "index.html": "/eldmeme/index.html",
+    "precache-manifest.34d8ee59c319244348677212ad61e4a6.js": "/eldmeme/precache-manifest.34d8ee59c319244348677212ad61e4a6.js",
+    "service-worker.js": "/eldmeme/service-worker.js",
+    "static/css/2.e648e96d.chunk.css.map": "/eldmeme/static/css/2.e648e96d.chunk.css.map",
+    "static/media/1.jpg": "/eldmeme/static/media/1.85884b24.jpg",
+    "static/media/2.jpg": "/eldmeme/static/media/2.02129098.jpg",
+    "static/media/3.jpg": "/eldmeme/static/media/3.fc60607e.jpg",
+    "static/media/index.css": "/eldmeme/static/media/roboto-latin-900italic.bc833e72.woff"
+  }
+}
