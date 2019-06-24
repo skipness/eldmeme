@@ -44,21 +44,20 @@ export class CanvasContextProvider extends React.Component {
   noActiveObject = () => this.canvas.getActiveObject() === null;
 
   addText = text => {
-    this.canvas.add(
-      new fabric.Textbox(text, {
-        angle: 0,
-        fill: '#ffffff',
-        fontFamily: 'PMingLiU',
-        fontSize: 40,
-        fontStyle: '',
-        fontWeight: 'normal',
-        left: 50,
-        textAlign: 'left',
-        top: 100,
-        stroke: null,
-        strokeWidth: 1,
-      })
-    );
+    const newText = new fabric.Textbox(text, {
+      angle: 0,
+      fill: '#ffffff',
+      fontFamily: 'PMingLiU',
+      fontSize: 40,
+      fontStyle: '',
+      fontWeight: 'normal',
+      left: 50,
+      textAlign: 'left',
+      top: 100,
+      stroke: null,
+      strokeWidth: 1,
+    });
+    this.canvas.add(newText).setActiveObject(newText);
   };
 
   removeSelectedText = () => {
