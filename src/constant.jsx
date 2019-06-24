@@ -11,4 +11,9 @@ export const fonts = {
   'Noto Sans HK': 'Noto Sans HK',
 };
 export const backgroundImages = [Image1, Image2, Image3];
-export const elderlyWords = ['早安', '認同請分享', '您知道嗎？'];
+export const elderlyWords = [
+  '早安',
+  '認同請分享',
+  '您知道嗎？',
+  '好人一生平安',
+];
