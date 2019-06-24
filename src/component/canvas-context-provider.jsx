@@ -62,11 +62,11 @@ export class CanvasContextProvider extends React.Component {
   };
 
   removeSelectedText = () => {
-    this.canvas.remove(this.canvas.getActiveObject());
+    this.canvas.remove(this.canvas.getActiveObject()).requestRenderAll();
   };
 
   removeAllText = () => {
-    this.canvas.remove(...this.canvas.getObjects());
+    this.canvas.remove(...this.canvas.getObjects()).requestRenderAll();
   };
 
   loadDefaultBackgroundImage = backgroundImage =>
