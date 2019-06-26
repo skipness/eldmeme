@@ -14,7 +14,7 @@ const FontSizePanel = () => (
         <CanvasContextConsumer>
           {({ activeObject, onFontSizeChange }) => (
             <LimittedTextField
-              value={activeObject && activeObject.fontSize}
+              value={(activeObject && activeObject.fontSize) || '40'}
               limit={{ min: '40', max: '120' }}
               onChange={onFontSizeChange}
             />

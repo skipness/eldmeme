@@ -9,12 +9,12 @@ const SizePanel = () => (
       <Grid container item>
         <CommonInput
           description="W"
-          value={(activeObject && activeObject.width) || 0}
+          value={(activeObject && activeObject.width) || '0'}
           onChange={value => onSizeChange('width', value)}
         />
         <CommonInput
           description="H"
-          value={(activeObject && activeObject.height) || 0}
+          value={(activeObject && activeObject.height) || '0'}
           onChange={value => onSizeChange('height', value)}
         />
       </Grid>

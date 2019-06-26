@@ -13,7 +13,7 @@ const RotationPanel = () => (
         </Grid>
         <Grid item xs={7}>
           <LimittedTextField
-            value={activeObject && activeObject.angle}
+            value={(activeObject && activeObject.angle) || '0'}
             limit={{ min: '0', max: '360' }}
             onChange={onAngleChange}
           />

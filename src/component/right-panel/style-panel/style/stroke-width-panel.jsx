@@ -14,7 +14,7 @@ const StrokeWidthPanel = () => (
         <CanvasContextConsumer>
           {({ activeObject, onStrokeWidthChange }) => (
             <LimittedTextField
-              value={activeObject && activeObject.strokeWidth}
+              value={(activeObject && activeObject.strokeWidth) || '0'}
               limit={{ min: '0', max: '5' }}
               onChange={onStrokeWidthChange}
             />
