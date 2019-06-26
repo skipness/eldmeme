@@ -15,7 +15,7 @@ const StrokeWidthPanel = () => (
           {({ activeObject, onStrokeWidthChange }) => (
             <LimittedTextField
               value={activeObject && activeObject.strokeWidth}
-              limit={{ min: '1', max: '5' }}
+              limit={{ min: '0', max: '5' }}
               onChange={onStrokeWidthChange}
             />
           )}
