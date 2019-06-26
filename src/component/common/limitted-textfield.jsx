@@ -6,14 +6,14 @@ class LimittedTextField extends React.Component {
 
   componentDidUpdate(prevProps, _) {
     if (this.props.value !== prevProps.value) {
-      this.setState({ value: this.toInt(this.props.value) });
+      this.setState({ value: this.props.value });
     }
   }
 
   onChange = event => {
-    const value = this.toInt(event.target.value);
+    const value = event.target.value;
     this.setState({ value: value });
-    this.props.onChange(value);
+    this.props.onChange(this.toInt(value));
   };
 
   toInt = value => Math.round(parseInt(value));
@@ -30,7 +30,7 @@ class LimittedTextField extends React.Component {
         margin="dense"
         multiline={false}
         type="number"
-        value={value || ''}
+        value={value || '0'}
         onChange={this.onChange}
       />
     );
