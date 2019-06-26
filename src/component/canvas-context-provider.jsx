@@ -69,17 +69,17 @@ export class CanvasContextProvider extends React.Component {
   };
 
   loadDefaultBackgroundImage = backgroundImage =>
-    this.loadBackgroundImage(backgroundImage);
+    this.loadImage(backgroundImage);
 
-  changeBackgroundImage = event => this.loadBackgroundImage(event.target.src);
+  changeBackgroundImage = event => this.loadImage(event.target.src);
 
   changeBackgroundImageFromUrl = event => {
     const value = event.target.value;
     if (value.trim().length === 0) return;
-    this.loadBackgroundImage(value);
+    this.loadImage(value);
   };
 
-  loadBackgroundImage = backgroundImage => {
+  loadImage = backgroundImage => {
     fabric.Image.fromURL(backgroundImage, image => {
       const canvasWidth = this.canvas.getWidth();
       const canvasHeight = this.canvas.getHeight();
