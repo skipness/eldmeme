@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
-import UnlimitedTextfield from '../common/unlimited-textfield';
+import UnlimitedTextfield from '../../common/unlimited-textfield';
 
 const CommonInput = props => {
   const { description, onChange, value } = props;

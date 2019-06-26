@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import { BorderOuterTwoTone } from '@material-ui/icons';
 import { CanvasContextConsumer } from '../../../canvas-context-provider';
-import LimittedTextField from '../../common/limitted-textfield';
+import LimittedTextField from '../../../common/limitted-textfield';
 
 const StrokeWidthPanel = () => (
   <Grid container item xs={7}>

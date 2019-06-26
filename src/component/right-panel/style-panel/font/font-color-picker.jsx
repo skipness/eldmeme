@@ -2,8 +2,8 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import { FormatColorTextTwoTone } from '@material-ui/icons';
 import { CanvasContextConsumer } from '../../../canvas-context-provider';
-import ColorPicker from '../../common/color-picker';
-import GradientBlock from '../../common/gradient-block';
+import ColorPicker from '../../../common/color-picker';
+import GradientBlock from '../../../common/gradient-block';
 
 const FontColorPicker = () => (
   <CanvasContextConsumer>

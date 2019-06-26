@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import PanelContainer from '../common/panel-container';
+import PanelContainer from '../../common/panel-container';
 import FontSelector from './font/font-selector';
 import FontColorPicker from './font/font-color-picker';
 import FontSizePanel from './font/font-size-panel';

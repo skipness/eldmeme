@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { CanvasContextConsumer } from '../../../canvas-context-provider';
-import LimittedTextField from '../../common/limitted-textfield';
+import LimittedTextField from '../../../common/limitted-textfield';
 
 const RotationPanel = () => (
   <CanvasContextConsumer>

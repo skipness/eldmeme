@@ -6,8 +6,8 @@ import {
   FormatUnderlinedTwoTone,
   StrikethroughSTwoTone,
 } from '@material-ui/icons';
-import StyledToggleButton from '../../common/styled-toggle-button';
-import StyledToggleButtonGroup from '../../common/styled-toggle-button-group';
+import StyledToggleButton from '../../../common/styled-toggle-button';
+import StyledToggleButtonGroup from '../../../common/styled-toggle-button-group';
 
 class TextFormatButtons extends React.Component {
   state = { formats: [] };
