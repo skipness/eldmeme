@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import ActionPanel from './action-panel/action-panel';
 import ObjectInfoPanel from './object-info-panel/object-info-panel';
 import StylePanel from './style-panel/style-panel';

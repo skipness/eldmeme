@@ -1,11 +1,9 @@
 import React from 'react';
-import {
-  Grid,
-  FormControl,
-  FormHelperText,
-  MenuItem,
-  Select,
-} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import { CanvasContextConsumer } from '../../../canvas-context-provider';
 import { fonts } from '../../../../constant';
 

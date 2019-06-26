@@ -1,5 +1,6 @@
 import React from 'react';
-import { InputAdornment, TextField } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
 
 class UnlimitedTextField extends React.Component {
   state = { value: this.props.value };
@@ -11,7 +12,7 @@ class UnlimitedTextField extends React.Component {
   }
 
   onChange = event => {
-    const roundedValue = this.toInt(event.target.value)
+    const roundedValue = this.toInt(event.target.value);
     this.setState({ value: roundedValue.toString() });
     this.props.onChange(roundedValue);
   };

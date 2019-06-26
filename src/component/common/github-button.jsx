@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, IconButton, SvgIcon } from '@material-ui/core';
+import Box  from '@material-ui/core/Box';
+import IconButton  from '@material-ui/core/IconButton';
+import SvgIcon  from '@material-ui/core/SvgIcon';
 
 const GithubButton = () => (
   <Box style={{ textAlign: 'right' }}>

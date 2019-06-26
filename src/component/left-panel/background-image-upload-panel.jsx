@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { CanvasContextConsumer } from '../canvas-context-provider';
 import ImageUrlTextField from '../common/image-url-textfield';
 

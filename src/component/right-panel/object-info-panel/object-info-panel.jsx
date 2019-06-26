@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import PanelContainer from '../../common/panel-container';
 import CoordinatePanel from './coordinate-panel/coordinate-panel';
 import SizePanel from './size-panel/size-panel';

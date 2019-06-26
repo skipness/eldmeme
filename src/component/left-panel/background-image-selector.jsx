@@ -1,12 +1,10 @@
 import React from 'react';
-import {
-  ButtonBase,
-  Grid,
-  GridList,
-  GridListTile,
-  Typography,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Grid from '@material-ui/core/Grid';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/styles/makeStyles';
 import { CanvasContextConsumer } from '../canvas-context-provider';
 import { backgroundImages } from '../../constant';
 

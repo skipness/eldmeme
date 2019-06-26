@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import TextFormatButtons from './text-format-buttons';
 import TextAlignmentButtons from './text-alignment-buttons';
 import { CanvasContextConsumer } from '../../../canvas-context-provider';

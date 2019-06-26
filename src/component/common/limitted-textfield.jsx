@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 
 class LimittedTextField extends React.Component {
   state = { value: this.props.value };
@@ -11,7 +11,7 @@ class LimittedTextField extends React.Component {
   }
 
   onChange = event => {
-    const roundedValue = this.toInt(event.target.value)
+    const roundedValue = this.toInt(event.target.value);
     this.setState({ value: roundedValue.toString() });
     this.props.onChange(roundedValue);
   };

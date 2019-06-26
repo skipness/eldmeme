@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import { FormatColorTextTwoTone } from '@material-ui/icons';
+import Grid from '@material-ui/core/Grid';
+import FormatColorTextTwoTone from '@material-ui/icons/FormatColorTextTwoTone';
 import { CanvasContextConsumer } from '../../../canvas-context-provider';
 import ColorPicker from '../../../common/color-picker';
 import GradientBlock from '../../../common/gradient-block';

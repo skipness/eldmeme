@@ -1,12 +1,11 @@
 import React from 'react';
-import { Grid, Tooltip } from '@material-ui/core';
-import {
-  AddTwoTone,
-  AddPhotoAlternateTwoTone,
-  DeleteTwoTone,
-  DeleteForeverTwoTone,
-  SaveTwoTone,
-} from '@material-ui/icons';
+import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
+import AddTwoTone from '@material-ui/icons/AddTwoTone';
+import AddPhotoAlternateTwoTone from '@material-ui/icons/AddPhotoAlternateTwoTone';
+import DeleteTwoTone from '@material-ui/icons/DeleteTwoTone';
+import DeleteForeverTwoTone from '@material-ui/icons/DeleteForeverTwoTone';
+import SaveTwoTone from '@material-ui/icons/SaveTwoTone';
 import StyledIconButton from '../../common/styled-icon-button';
 import { CanvasContextConsumer } from '../../canvas-context-provider';
 import AddImageDialog from './add-image-dialog';

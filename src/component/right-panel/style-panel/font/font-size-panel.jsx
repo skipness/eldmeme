@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import { FormatSizeTwoTone } from '@material-ui/icons';
+import Grid from '@material-ui/core/Grid';
+import FormatSizeTwoTone from '@material-ui/icons/FormatSizeTwoTone';
 import { CanvasContextConsumer } from '../../../canvas-context-provider';
 import LimittedTextField from '../../../common/limitted-textfield';
 

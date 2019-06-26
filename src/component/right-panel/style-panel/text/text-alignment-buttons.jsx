@@ -1,11 +1,9 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import {
-  FormatAlignLeftTwoTone,
-  FormatAlignCenterTwoTone,
-  FormatAlignRightTwoTone,
-  FormatAlignJustifyTwoTone,
-} from '@material-ui/icons';
+import Grid from '@material-ui/core/Grid';
+import FormatAlignLeftTwoTone from '@material-ui/icons/FormatAlignLeftTwoTone';
+import FormatAlignCenterTwoTone from '@material-ui/icons/FormatAlignCenterTwoTone';
+import FormatAlignRightTwoTone from '@material-ui/icons/FormatAlignRightTwoTone';
+import FormatAlignJustifyTwoTone from '@material-ui/icons/FormatAlignJustifyTwoTone';
 import StyledToggleButton from '../../../common/styled-toggle-button';
 import StyledToggleButtonGroup from '../../../common/styled-toggle-button-group';
 

@@ -1,11 +1,9 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import {
-  FormatBoldTwoTone,
-  FormatItalicTwoTone,
-  FormatUnderlinedTwoTone,
-  StrikethroughSTwoTone,
-} from '@material-ui/icons';
+import Grid from '@material-ui/core/Grid';
+import FormatBoldTwoTone from '@material-ui/icons/FormatBoldTwoTone';
+import FormatItalicTwoTone from '@material-ui/icons/FormatItalicTwoTone';
+import FormatUnderlinedTwoTone from '@material-ui/icons/FormatUnderlinedTwoTone';
+import StrikethroughSTwoTone from '@material-ui/icons/StrikethroughSTwoTone';
 import StyledToggleButton from '../../../common/styled-toggle-button';
 import StyledToggleButtonGroup from '../../../common/styled-toggle-button-group';
 
