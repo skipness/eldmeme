@@ -1,19 +1,14 @@
 import React from 'react';
-import { Grid, TextField } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { CanvasContextConsumer } from '../canvas-context-provider';
+import ImageUrlTextField from '../common/image-url-textfield';
 
 const BackgroundImageFromUrl = () => (
   <CanvasContextConsumer>
     {({ changeBackgroundImageFromUrl }) => (
       <Grid container item alignItems="center" spacing={3}>
         <Grid item>
-          <TextField
-            label="圖片網址"
-            type="url"
-            placeholder="只限png、jpg格式"
-            inputProps={{ pattern: '(https?://.*.(?:png|jpg))' }}
-            onChange={changeBackgroundImageFromUrl}
-          />
+          <ImageUrlTextField onChange={changeBackgroundImageFromUrl} />
         </Grid>
         {/* <Grid item>
                     <Typography variant='body1'> 或 </Typography>
