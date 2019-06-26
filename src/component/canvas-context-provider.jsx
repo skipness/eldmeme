@@ -41,7 +41,7 @@ export class CanvasContextProvider extends React.Component {
     });
   };
 
-  noActiveObject = () => this.canvas.getActiveObject() === null;
+  noActiveObject = () => this.state.activeObject === null;
 
   addText = text => {
     const newText = new fabric.Textbox(text, {
