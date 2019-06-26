@@ -55,9 +55,18 @@ export class CanvasContextProvider extends React.Component {
       textAlign: 'left',
       top: 100,
       stroke: null,
-      strokeWidth: 1,
+      strokeWidth: 0,
     });
     this.canvas.add(newText).setActiveObject(newText);
+  };
+
+  addImage = url => {
+    if (url.trim().length === 0) return;
+    const canvasWidth = this.canvas.getWidth();
+    const canvasHeight = this.canvas.getHeight();
+    this.loadImage(url, canvasWidth / 2, canvasHeight / 2, 1, image => {
+      this.canvas.add(image).setActiveObject(image);
+    });
   };
 
   removeSelectedText = () => {
@@ -68,32 +77,49 @@ export class CanvasContextProvider extends React.Component {
     this.canvas.remove(...this.canvas.getObjects()).requestRenderAll();
   };
 
-  loadDefaultBackgroundImage = backgroundImage =>
-    this.loadImage(backgroundImage);
+  loadDefaultBackgroundImage = backgroundImage => {
+    const canvasWidth = this.canvas.getWidth();
+    const canvasHeight = this.canvas.getHeight();
+    this.loadImage(backgroundImage, canvasWidth, canvasHeight, 0.8, image => {
+      this.canvas.setBackgroundImage(image);
+      this.canvas.requestRenderAll();
+    });
+  };
 
-  changeBackgroundImage = event => this.loadImage(event.target.src);
+  changeBackgroundImage = event => {
+    const src = event.target.src;
+    const canvasWidth = this.canvas.getWidth();
+    const canvasHeight = this.canvas.getHeight();
+    this.loadImage(src, canvasWidth, canvasHeight, 0.8, image => {
+      this.canvas.setBackgroundImage(image);
+      this.canvas.requestRenderAll();
+    });
+  };
 
   changeBackgroundImageFromUrl = event => {
     const value = event.target.value;
     if (value.trim().length === 0) return;
-    this.loadImage(value);
+    const canvasWidth = this.canvas.getWidth();
+    const canvasHeight = this.canvas.getHeight();
+    this.loadImage(value, canvasWidth, canvasHeight, 0.8, image => {
+      this.canvas.setBackgroundImage(image);
+      this.canvas.requestRenderAll();
+    });
   };
 
-  loadImage = backgroundImage => {
-    fabric.Image.fromURL(backgroundImage, image => {
-      const canvasWidth = this.canvas.getWidth();
-      const canvasHeight = this.canvas.getHeight();
-      const canvasRatio = canvasWidth / canvasHeight;
+  loadImage = (image, expectedWidth, expectedHeight, opacity, callback) => {
+    fabric.Image.fromURL(image, image => {
+      const canvasRatio = expectedWidth / expectedHeight;
       const imageRatio = image.width / image.height;
       let left, top, scaleFactor;
       if (canvasRatio >= imageRatio) {
-        scaleFactor = canvasWidth / image.width;
+        scaleFactor = expectedWidth / image.width;
         left = 0;
-        top = -(image.height * scaleFactor - canvasHeight) / 2;
+        top = -(image.height * scaleFactor - expectedHeight) / 2;
       } else {
-        scaleFactor = canvasHeight / image.height;
+        scaleFactor = expectedHeight / image.height;
         top = 0;
-        left = -(image.width * scaleFactor - canvasWidth) / 2;
+        left = -(image.width * scaleFactor - expectedWidth) / 2;
       }
       image.set({
         top: top,
@@ -102,10 +128,9 @@ export class CanvasContextProvider extends React.Component {
         originY: 'top',
         scaleX: scaleFactor,
         scaleY: scaleFactor,
-        opacity: 0.8,
+        opacity: opacity,
       });
-      this.canvas.setBackgroundImage(image);
-      this.canvas.requestRenderAll();
+      callback(image);
     });
   };
 
@@ -244,6 +269,7 @@ export class CanvasContextProvider extends React.Component {
     const { activeObject } = this.state;
     const {
       addText,
+      addImage,
       removeSelectedText,
       removeAllText,
       onCoordinateChange,
@@ -267,6 +293,7 @@ export class CanvasContextProvider extends React.Component {
         value={{
           activeObject: activeObject,
           addText: addText,
+          addImage: addImage,
           removeSelectedText: removeSelectedText,
           removeAllText: removeAllText,
           onCoordinateChange: onCoordinateChange,
