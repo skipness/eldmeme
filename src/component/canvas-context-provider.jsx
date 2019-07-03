@@ -1,18 +1,27 @@
 import React from 'react';
-import { fabric } from 'fabric';
-import { backgroundImages } from '../constant';
+import {fabric} from 'fabric';
+import {backgroundImages} from '../constant';
 
 const CanvasContext = React.createContext();
 
 export class CanvasContextProvider extends React.Component {
-  state = { activeObject: null };
+  state = {activeObject: null};
 
   componentDidMount() {
+    let zoomRatio = window.innerWidth * 0.75 / 854;
+    if (zoomRatio > 1) {
+      zoomRatio = 1;
+    }
     this.canvas = new fabric.Canvas('canvas', {
       backgroundColor: 'lightgrey',
       width: 854,
       height: 480,
     });
+    this.canvas.setDimensions({
+      width: this.canvas.getWidth() * zoomRatio,
+      height: this.canvas.getHeight() * zoomRatio
+    });
+    // this.canvas.setZoom(zoomRatio);
     this.loadDefaultBackgroundImage(backgroundImages[0]);
     this.addListener();
   }
@@ -33,7 +42,7 @@ export class CanvasContextProvider extends React.Component {
     });
 
     this.canvas.on('selection:cleared', _ => {
-      this.setState({ activeObject: null });
+      this.setState({activeObject: null});
     });
 
     this.canvas.on('after:render', () => {
@@ -249,11 +258,11 @@ export class CanvasContextProvider extends React.Component {
     this.canvas.getActiveObject().setShadow(
       event.target.checked
         ? {
-            color: 'rgba(0,0,0,0.7)',
-            blur: 10,
-            offsetX: 2,
-            offsetY: 2,
-          }
+          color: 'rgba(0,0,0,0.7)',
+          blur: 10,
+          offsetX: 2,
+          offsetY: 2,
+        }
         : null
     );
     this.canvas.requestRenderAll();
@@ -261,12 +270,12 @@ export class CanvasContextProvider extends React.Component {
 
   saveImage = event => {
     event.persist();
-    event.target.parentElement.parentElement.parentElement.href = this.canvas.toDataURL();
+    event.target.parentElement.parentElement.parentElement.href = this.canvas.toDataURL({format: 'png', quality: 0.8});
   };
 
   render = () => {
-    const { children } = this.props;
-    const { activeObject } = this.state;
+    const {children} = this.props;
+    const {activeObject} = this.state;
     const {
       addText,
       addImage,
