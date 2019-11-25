@@ -6,7 +6,7 @@ import { backgroundImages } from '../constant';
 const CanvasContext = React.createContext();
 
 export class CanvasContextProvider extends React.Component {
-  state = { activeObject: null };
+  state = { activeObject: null, currentWidth: window.innerWidth };
 
   componentDidMount() {
     this.canvas = new fabric.Canvas('canvas', {
@@ -46,7 +46,12 @@ export class CanvasContextProvider extends React.Component {
     this.canvas.on('after:render', () => {
       this.canvas.calcOffset();
     });
-    window.addEventListener('resize', debounce(this.onWindowSizeChange, 150));
+    window.addEventListener('resize', event => {
+      debounce(
+        () => this.onWindowSizeChange(event, this.state.currentWidth),
+        150
+      );
+    });
   };
 
   noActiveObject = () => this.state.activeObject === null;
@@ -213,12 +218,15 @@ export class CanvasContextProvider extends React.Component {
     this.canvas.requestRenderAll();
   };
 
-  onWindowSizeChange = () => {
-    const newWidth = 854 * this.getZoomRatio();
-    const newHeight = 480 * this.getZoomRatio();
-    this.canvas.setZoom(this.getZoomRatio());
-    this.canvas.setWidth(newWidth);
-    this.canvas.setHeight(newHeight);
+  onWindowSizeChange = (event, currentWidth) => {
+    if (event.target.innerWidth !== currentWidth) {
+      const newWidth = 854 * this.getZoomRatio();
+      const newHeight = 480 * this.getZoomRatio();
+      this.canvas.setZoom(this.getZoomRatio());
+      this.canvas.setWidth(newWidth);
+      this.canvas.setHeight(newHeight);
+      this.setState({ currentWidth: event.target.innerWidth });
+    }
   };
 
   setGradient = type => {
