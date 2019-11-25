@@ -1,4 +1,5 @@
 import React from 'react';
+import debounce from 'lodash.debounce';
 import { fabric } from 'fabric';
 import { backgroundImages } from '../constant';
 
@@ -10,12 +11,18 @@ export class CanvasContextProvider extends React.Component {
   componentDidMount() {
     this.canvas = new fabric.Canvas('canvas', {
       backgroundColor: 'lightgrey',
-      width: 854,
-      height: 480,
+      width: 854 * this.getZoomRatio(),
+      height: 480 * this.getZoomRatio(),
     });
     this.loadDefaultBackgroundImage(backgroundImages[0]);
     this.addListener();
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onWindowSizeChange);
+  }
+
+  getZoomRatio = () => Math.min(1, (window.innerWidth * 0.75) / 854);
 
   addListener = () => {
     [
@@ -39,6 +46,7 @@ export class CanvasContextProvider extends React.Component {
     this.canvas.on('after:render', () => {
       this.canvas.calcOffset();
     });
+    window.addEventListener('resize', debounce(this.onWindowSizeChange, 150));
   };
 
   noActiveObject = () => this.state.activeObject === null;
@@ -109,27 +117,9 @@ export class CanvasContextProvider extends React.Component {
 
   loadImage = (image, expectedWidth, expectedHeight, opacity, callback) => {
     fabric.Image.fromURL(image, image => {
-      const canvasRatio = expectedWidth / expectedHeight;
-      const imageRatio = image.width / image.height;
-      let left, top, scaleFactor;
-      if (canvasRatio >= imageRatio) {
-        scaleFactor = expectedWidth / image.width;
-        left = 0;
-        top = -(image.height * scaleFactor - expectedHeight) / 2;
-      } else {
-        scaleFactor = expectedHeight / image.height;
-        top = 0;
-        left = -(image.width * scaleFactor - expectedWidth) / 2;
-      }
-      image.set({
-        top: top,
-        left: left,
-        originX: 'left',
-        originY: 'top',
-        scaleX: scaleFactor,
-        scaleY: scaleFactor,
-        opacity: opacity,
-      });
+      image.set({ originX: 'left', originY: 'top', opacity: opacity });
+      image.scaleToHeight(expectedHeight);
+      image.scaleToWidth(expectedWidth);
       callback(image);
     });
   };
@@ -223,6 +213,14 @@ export class CanvasContextProvider extends React.Component {
     this.canvas.requestRenderAll();
   };
 
+  onWindowSizeChange = () => {
+    const newWidth = 854 * this.getZoomRatio();
+    const newHeight = 480 * this.getZoomRatio();
+    this.canvas.setZoom(this.getZoomRatio());
+    this.canvas.setWidth(newWidth);
+    this.canvas.setHeight(newHeight);
+  };
+
   setGradient = type => {
     if (this.noActiveObject()) return;
     const object = this.canvas.getActiveObject();
@@ -261,7 +259,11 @@ export class CanvasContextProvider extends React.Component {
 
   saveImage = event => {
     event.persist();
-    event.target.parentElement.parentElement.parentElement.href = this.canvas.toDataURL();
+    event.target.parentElement.parentElement.parentElement.href = this.canvas.toDataURL(
+      {
+        multiplier: 854 / this.canvas.getWidth(),
+      }
+    );
   };
 
   render = () => {
