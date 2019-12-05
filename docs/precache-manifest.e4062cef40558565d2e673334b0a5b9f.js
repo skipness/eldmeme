@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bd4630e956f4aabccc3cd37206ae5147",
+    "revision": "d60cd006d05d0ddc495aa362724b27df",
     "url": "/eldmeme/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/eldmeme/static/js/2.8209220e.chunk.js"
   },
   {
-    "revision": "72c38aabe2b59f4206df",
-    "url": "/eldmeme/static/js/main.fb0fafa7.chunk.js"
+    "revision": "664db997cb2911fc82fc",
+    "url": "/eldmeme/static/js/main.eda4f8c4.chunk.js"
   },
   {
     "revision": "8be0dc9db99d65159783",
