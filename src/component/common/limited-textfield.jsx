@@ -1,17 +1,21 @@
-import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import React, { useEffect, useState } from 'react';
 
-const UnlimitedTextField = ({ disabled, onChange, value }) => {
-  const [textfieldValue, setTextfieldValue] = useState(value);
+const LimitedTextField = ({
+  disabled,
+  onChange,
+  limit: { min, max },
+  value,
+}) => {
+  const [textfiledValue, setTextfieldValue] = useState(value);
   useEffect(() => {
     setTextfieldValue(toInt(value).toString());
   }, [value]);
 
   const onTextfieldValueChange = event => {
     const roundedValue = toInt(event.target.value);
-    setTextfieldValue(roundedValue.toString());
     onChange(roundedValue);
+    setTextfieldValue(roundedValue.toString());
   };
 
   const toInt = value => Math.round(parseInt(value));
@@ -20,16 +24,14 @@ const UnlimitedTextField = ({ disabled, onChange, value }) => {
     <TextField
       disabled={disabled}
       fullWidth
-      InputProps={{
-        endAdornment: <InputAdornment position='end'>px</InputAdornment>,
-      }}
+      inputProps={{ min: min, max: max }}
       margin='dense'
       multiline={false}
       onChange={onTextfieldValueChange}
       type='number'
-      value={textfieldValue.toString()}
+      value={textfiledValue.toString()}
     />
   );
 };
 
-export default UnlimitedTextField;
+export default LimitedTextField;

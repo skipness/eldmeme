@@ -1,57 +1,92 @@
-import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Tooltip from '@material-ui/core/Tooltip';
-import AddTwoTone from '@material-ui/icons/AddTwoTone';
 import AddPhotoAlternateTwoTone from '@material-ui/icons/AddPhotoAlternateTwoTone';
-import DeleteTwoTone from '@material-ui/icons/DeleteTwoTone';
+import AddTwoTone from '@material-ui/icons/AddTwoTone';
 import DeleteForeverTwoTone from '@material-ui/icons/DeleteForeverTwoTone';
+import DeleteTwoTone from '@material-ui/icons/DeleteTwoTone';
 import SaveTwoTone from '@material-ui/icons/SaveTwoTone';
-import StyledIconButton from '../../common/styled-icon-button';
-import { CanvasContextConsumer } from '../../canvas-context-provider';
+import { fabric } from 'fabric';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { CanvasContext } from '../../canvas-context-provider';
 import AddImageDialog from './add-image-dialog';
+import TooltipStyledIconButton from './tooltip-styled-icon-button';
 
 const ActionPanel = () => {
-  const [open, setOpen] = React.useState(false);
-  const onClick = () => setOpen(!open);
+  const canvasContext = useContext(CanvasContext);
+  const canvasRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const onAddImageDialogClick = () => setOpen(!open);
+  const addText = () => {
+    const { current: canvas } = canvasRef;
+    const newText = new fabric.Textbox('文字', {
+      angle: 0,
+      fill: '#ffffff',
+      fontFamily: 'PMingLiU',
+      fontSize: 40,
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      left: 50,
+      textAlizgn: 'left',
+      top: 100,
+      stroke: null,
+      strokeWidth: 0,
+    });
+    canvas.add(newText).setActiveObject(newText);
+  };
+  const removeSelectedText = () => {
+    const { current: canvas } = canvasRef;
+    canvas.remove(canvas.getActiveObject()).requestRenderAll();
+  };
+  const removeAllText = () => {
+    const { current: canvas } = canvasRef;
+    canvas.remove(...canvas.getObjects()).requestRenderAll();
+  };
+  const saveImage = event => {
+    const { current: canvas } = canvasRef;
+    event.persist();
+    event.target.parentElement.parentElement.parentElement.href = canvas.toDataURL(
+      {
+        multiplier: 854 / canvas.getWidth(),
+      }
+    );
+  };
+  useEffect(() => {
+    const {
+      current: { canvas },
+    } = canvasContext;
+    canvasRef.current = canvas;
+  }, [canvasContext]);
+
   return (
-    <CanvasContextConsumer>
-      {({
-        addText,
-        addImage,
-        removeSelectedText,
-        removeAllText,
-        saveImage,
-      }) => (
-        <Grid container item justify="space-between">
-          <Tooltip title="新增文字">
-            <StyledIconButton onClick={() => addText('文字')}>
-              <AddTwoTone />
-            </StyledIconButton>
-          </Tooltip>
-          <Tooltip title="新增圖片">
-            <StyledIconButton onClick={onClick}>
-              <AddPhotoAlternateTwoTone />
-            </StyledIconButton>
-          </Tooltip>
-          <AddImageDialog addImage={addImage} onClick={onClick} open={open} />
-          <Tooltip title="移除已選文字">
-            <StyledIconButton onClick={removeSelectedText}>
-              <DeleteTwoTone />
-            </StyledIconButton>
-          </Tooltip>
-          <Tooltip title="移除所有文字">
-            <StyledIconButton onClick={removeAllText}>
-              <DeleteForeverTwoTone />
-            </StyledIconButton>
-          </Tooltip>
-          <Tooltip title="下載">
-            <StyledIconButton download="image.png" href="#" onClick={saveImage}>
-              <SaveTwoTone />
-            </StyledIconButton>
-          </Tooltip>
-        </Grid>
-      )}
-    </CanvasContextConsumer>
+    <Grid container item justify='space-between'>
+      <TooltipStyledIconButton
+        icon={<AddTwoTone />}
+        onClick={addText}
+        title='新增文字'
+      />
+      <TooltipStyledIconButton
+        icon={<AddPhotoAlternateTwoTone />}
+        onClick={onAddImageDialogClick}
+        title='新增圖片'
+      />
+      <AddImageDialog onClick={onAddImageDialogClick} open={open} />
+      <TooltipStyledIconButton
+        icon={<DeleteTwoTone />}
+        onClick={removeSelectedText}
+        title='移除已選文字'
+      />
+      <TooltipStyledIconButton
+        icon={<DeleteForeverTwoTone />}
+        onClick={removeAllText}
+        title='移除所有文字'
+      />
+      <TooltipStyledIconButton
+        download='image.png'
+        href='#'
+        icon={<SaveTwoTone />}
+        onClick={saveImage}
+        title='下載'
+      />
+    </Grid>
   );
 };
 

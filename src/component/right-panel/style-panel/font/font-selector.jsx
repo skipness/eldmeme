@@ -1,32 +1,37 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { CanvasContextConsumer } from '../../../canvas-context-provider';
+import React, { useState } from 'react';
 import { fonts } from '../../../../constant';
+import { useActiveObject, useCanvas } from '../../../../hooks';
 
-class Selector extends React.Component {
-  state = { font: this.props.font };
+const initialState = 'PMingLiU';
 
-  componentDidUpdate(prevProps, _) {
-    if (this.props.font !== prevProps.font) {
-      this.setState({ font: this.props.font });
-    }
-  }
-
-  onFontChange = event => {
-    const font = event.target.value;
-    this.setState({ font: font });
-    this.props.onFontChange(font);
+const FontSelector = () => {
+  const activeObject = useActiveObject(
+    () => setFont(initialState),
+    object => setFont(object.fontFamily)
+  );
+  const canvas = useCanvas();
+  const [font, setFont] = useState(initialState);
+  const disabled = activeObject === null;
+  const onFontChange = font => {
+    if (activeObject === null);
+    activeObject.set('fontFamily', font);
+    canvas.requestRenderAll();
+    setFont(font);
   };
 
-  render() {
-    const { font } = this.state;
-    return (
-      <FormControl fullWidth>
-        <Select displayEmpty value={font} onChange={this.onFontChange}>
+  return (
+    <Grid container item justify='center'>
+      <FormControl disabled={disabled} fullWidth>
+        <Select
+          displayEmpty
+          value={font}
+          onChange={event => onFontChange(event.target.value)}
+        >
           {Object.keys(fonts).map((fontName, index) => (
             <MenuItem
               key={index}
@@ -39,21 +44,8 @@ class Selector extends React.Component {
         </Select>
         <FormHelperText>字體</FormHelperText>
       </FormControl>
-    );
-  }
-}
-
-const FontSelector = () => (
-  <Grid container item justify="center">
-    <CanvasContextConsumer>
-      {({ activeObject, onFontChange }) => (
-        <Selector
-          font={(activeObject && activeObject.fontFamily) || 'PMingLiU'}
-          onFontChange={onFontChange}
-        />
-      )}
-    </CanvasContextConsumer>
-  </Grid>
-);
+    </Grid>
+  );
+};
 
 export default FontSelector;

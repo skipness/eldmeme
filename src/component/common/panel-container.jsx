@@ -1,6 +1,6 @@
-import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import makeStyles from '@material-ui/styles/makeStyles';
+import React from 'react';
 
 const useStyles = makeStyles({
   paper: {
@@ -9,9 +9,9 @@ const useStyles = makeStyles({
   },
 });
 
-const PanelContainer = props => {
+const PanelContainer = ({ children }) => {
   const classes = useStyles();
-  return <Paper className={classes.paper}>{props.children}</Paper>;
+  return <Paper className={classes.paper}>{children}</Paper>;
 };
 
 export default PanelContainer;

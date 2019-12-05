@@ -1,25 +1,40 @@
-import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { CanvasContextConsumer } from '../../../canvas-context-provider';
+import React, { useState } from 'react';
+import { useActiveObject, useCanvas } from '../../../../hooks';
 import CommonInput from '../common-input';
 
-const CoordinatePanel = () => (
-  <CanvasContextConsumer>
-    {({ activeObject, onCoordinateChange }) => (
-      <Grid container item>
-        <CommonInput
-          description="X"
-          value={(activeObject && activeObject.left) || '0'}
-          onChange={value => onCoordinateChange('left', value)}
-        />
-        <CommonInput
-          description="Y"
-          value={(activeObject && activeObject.top) || '0'}
-          onChange={value => onCoordinateChange('top', value)}
-        />
-      </Grid>
-    )}
-  </CanvasContextConsumer>
-);
+const initialState = { left: 0, top: 0 };
+
+const CoordinatePanel = () => {
+  const activeObject = useActiveObject(
+    () => setCoordinate(initialState),
+    object => setCoordinate({ left: object.left, top: object.top })
+  );
+  const canvas = useCanvas();
+  const [coordinate, setCoordinate] = useState(initialState);
+  const disabled = activeObject === null;
+  const onCoordinateChange = (coordinate, value) => {
+    if (activeObject === null) return;
+    activeObject.set(coordinate, value).setCoords();
+    canvas.requestRenderAll();
+  };
+
+  return (
+    <Grid container item>
+      <CommonInput
+        disabled={disabled}
+        description='X'
+        onChange={value => onCoordinateChange('left', value)}
+        value={coordinate.left}
+      />
+      <CommonInput
+        disabled={disabled}
+        description='Y'
+        onChange={value => onCoordinateChange('top', value)}
+        value={coordinate.top}
+      />
+    </Grid>
+  );
+};
 
 export default CoordinatePanel;
