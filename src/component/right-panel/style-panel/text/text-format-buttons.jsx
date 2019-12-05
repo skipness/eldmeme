@@ -1,51 +1,65 @@
-import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import FormatBoldTwoTone from '@material-ui/icons/FormatBoldTwoTone';
 import FormatItalicTwoTone from '@material-ui/icons/FormatItalicTwoTone';
 import FormatUnderlinedTwoTone from '@material-ui/icons/FormatUnderlinedTwoTone';
 import StrikethroughSTwoTone from '@material-ui/icons/StrikethroughSTwoTone';
+import React, { useState } from 'react';
+import { useActiveObject, useCanvas } from '../../../../hooks';
 import StyledToggleButton from '../../../common/styled-toggle-button';
 import StyledToggleButtonGroup from '../../../common/styled-toggle-button-group';
 
-class TextFormatButtons extends React.Component {
-  state = { formats: [] };
+const initialState = [];
 
-  componentDidUpdate(prevProps, _) {
-    if (this.props.formats !== prevProps.formats) {
-      this.setState({ formats: this.props.formats });
+const TextFormatButtons = () => {
+  const activeObject = useActiveObject(
+    () => setTextFormat(initialState),
+    object => {
+      const bold = object.fontWeight === 'bold' ? 'bold' : '';
+      const italic = object.fontStyle === 'italic' ? 'italic' : '';
+      const linethrough = object.linethrough === true ? 'linethrough' : '';
+      const underline = object.underline === true ? 'underline' : '';
+      setTextFormat([bold, italic, linethrough, underline]);
     }
-  }
-
-  onFormatChange = (_, formats) => {
-    this.setState({ formats: formats });
-    this.props.onTextFormatChange(formats);
+  );
+  const canvas = useCanvas();
+  const [textFormat, setTextFormat] = useState(initialState);
+  const disabled = activeObject === null;
+  const onFormatChange = (_, formats) => {
+    if (activeObject === null) return;
+    const bold = formats.includes('bold');
+    const italic = formats.includes('italic');
+    const linethrough = formats.includes('linethrough');
+    const underline = formats.includes('underline');
+    activeObject.set('fontWeight', bold ? 'bold' : 'normal');
+    activeObject.set('fontStyle', italic ? 'italic' : 'normal');
+    activeObject.set('linethrough', linethrough);
+    activeObject.set('underline', underline);
+    canvas.requestRenderAll();
+    setTextFormat(formats);
   };
 
-  render() {
-    const { formats } = this.state;
-    return (
-      <Grid container item alignItems="center" justify="center">
-        <StyledToggleButtonGroup
-          onChange={this.onFormatChange}
-          size="small"
-          value={formats}
-        >
-          <StyledToggleButton value="bold">
-            <FormatBoldTwoTone />
-          </StyledToggleButton>
-          <StyledToggleButton value="italic">
-            <FormatItalicTwoTone />
-          </StyledToggleButton>
-          <StyledToggleButton value="underline">
-            <FormatUnderlinedTwoTone />
-          </StyledToggleButton>
-          <StyledToggleButton value="linethrough">
-            <StrikethroughSTwoTone />
-          </StyledToggleButton>
-        </StyledToggleButtonGroup>
-      </Grid>
-    );
-  }
-}
+  return (
+    <Grid container item alignItems='center' justify='center'>
+      <StyledToggleButtonGroup
+        onChange={onFormatChange}
+        size='small'
+        value={textFormat}
+      >
+        <StyledToggleButton disabled={disabled} value='bold'>
+          <FormatBoldTwoTone />
+        </StyledToggleButton>
+        <StyledToggleButton disabled={disabled} value='italic'>
+          <FormatItalicTwoTone />
+        </StyledToggleButton>
+        <StyledToggleButton disabled={disabled} value='underline'>
+          <FormatUnderlinedTwoTone />
+        </StyledToggleButton>
+        <StyledToggleButton disabled={disabled} value='linethrough'>
+          <StrikethroughSTwoTone />
+        </StyledToggleButton>
+      </StyledToggleButtonGroup>
+    </Grid>
+  );
+};
 
 export default TextFormatButtons;

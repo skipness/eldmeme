@@ -1,16 +1,33 @@
-import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { CanvasContextConsumer } from '../canvas-context-provider';
+import { fabric } from 'fabric';
+import React, { useContext, useEffect, useState } from 'react';
+import { CanvasContext } from '../canvas-context-provider';
 import ImageUrlTextField from '../common/image-url-textfield';
 
-const BackgroundImageFromUrl = () => (
-  <CanvasContextConsumer>
-    {({ changeBackgroundImageFromUrl }) => (
-      <Grid container item alignItems="center" spacing={3}>
-        <Grid item>
-          <ImageUrlTextField onChange={changeBackgroundImageFromUrl} />
-        </Grid>
-        {/* <Grid item>
+const BackgroundImageFromUrl = () => {
+  const context = useContext(CanvasContext);
+  const [background, setBackground] = useState();
+  useEffect(() => {
+    const {
+      current: { canvas },
+    } = context;
+    fabric.Image.fromURL(background, image => {
+      image.set({ originX: 'left', originY: 'top', opacity: 0.8 });
+      image.scaleToHeight(canvas.getHeight());
+      image.scaleToWidth(canvas.getWidth());
+      canvas.setBackgroundImage(image);
+      canvas.requestRenderAll();
+    });
+  }, [background]);
+
+  return (
+    <Grid container item alignItems='center' spacing={3}>
+      <Grid item>
+        <ImageUrlTextField
+          onChange={event => setBackground(event.target.value)}
+        />
+      </Grid>
+      {/* <Grid item>
                     <Typography variant='body1'> 或 </Typography>
                 </Grid>
                 <Grid item>
@@ -23,9 +40,8 @@ const BackgroundImageFromUrl = () => (
                         />
                     </Button>
                 </Grid> */}
-      </Grid>
-    )}
-  </CanvasContextConsumer>
-);
+    </Grid>
+  );
+};
 
 export default BackgroundImageFromUrl;

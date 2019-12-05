@@ -1,5 +1,5 @@
-import withStyles from '@material-ui/styles/withStyles';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import withStyles from '@material-ui/styles/withStyles';
 
 const StyledToggleButtonGroup = withStyles({
   root: {

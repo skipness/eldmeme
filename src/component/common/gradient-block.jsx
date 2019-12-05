@@ -1,17 +1,17 @@
 import React from 'react';
 
-const GradientBlock = props => (
+const GradientBlock = ({ disabled, onClick }) => (
   <div
-    onClick={props.onClick}
+    onClick={onClick}
     style={{
-      display: 'inline-block',
-      width: '0.75rem',
-      height: '0.75rem',
-      borderRadius: '50%',
       background:
         'linear-gradient(to right, red , orange, yellow, green, blue, violet)',
+      borderRadius: '50%',
       boxShadow: '0 0 0 3px white',
-      cursor: 'pointer',
+      cursor: `${disabled ? 'not-allowed' : 'pointer'}`,
+      display: 'inline-block',
+      height: '0.75rem',
+      width: '0.75rem',
     }}
   />
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WebFont from 'webfontloader';
 import 'typeface-roboto';
+import WebFont from 'webfontloader';
 import App from './app';
 
 WebFont.load({
