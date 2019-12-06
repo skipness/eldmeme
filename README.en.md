@@ -1,28 +1,28 @@
-# 簡易長輩圖製作器
+# Simple Eldmeme Generator
 
-[English](https://github.com/skipness/eldmeme/blob/master/README.en.md)
+[中文](https://github.com/skipness/eldmeme/blob/master/README.md)
 
-這是一個用空閑時間寫的長輩圖製作器，功能雖然簡單不過可以製作到基本的長輩圖
+A simple Eldmeme(長輩圖) generator written in my spare time.
 
 ![image](https://user-images.githubusercontent.com/8035517/70292380-168fe700-1819-11ea-9a79-83f41f97b2e8.png)
 
-## 安裝及運行
+## Install & Run
 
 ```console
 npm i
 npm start
 ```
 
-## 編譯
+## Build
 
 ```console
 npm run build
 ```
 
-## 貢獻
+## Contributing
 
-歡迎提出 PR／新功能
-這個 project 使用了[Prettier](https://prettier.io/)來格式化程式碼，所以提出 PR 前也請使用以下 settings 把程式碼格式化：
+Welcome any pr / suggestions
+This project uses [Prettier](https://prettier.io/) as code formatter, please use the following settings to format code before creating any PR:
 
 ```json
 {
@@ -45,6 +45,6 @@ npm run build
 }
 ```
 
-## 協議
+## License
 
 [MIT](https://github.com/skipness/eldmeme/blob/master/LICENSE) @ skipness
