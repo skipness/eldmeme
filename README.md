@@ -22,28 +22,7 @@ npm run build
 ## 貢獻
 
 歡迎提出 PR／新功能
-這個 project 使用了[Prettier](https://prettier.io/)來格式化程式碼，所以提出 PR 前也請使用以下 settings 把程式碼格式化：
 
-```json
-{
-  "arrowParens": "avoid",
-  "bracketSpacing": true,
-  "endOfLine": "auto",
-  "htmlWhitespaceSensitivity": "css",
-  "insertPragma": false,
-  "jsxBracketSameLine": false,
-  "jsxSingleQuote": true,
-  "printWidth": 80,
-  "proseWrap": "preserve",
-  "quoteProps": "as-needed",
-  "requirePragma": false,
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "useTabs": false
-}
-```
 
 ## 協議
 
